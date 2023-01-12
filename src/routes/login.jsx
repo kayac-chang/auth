@@ -1,12 +1,12 @@
-import login from "../api/login";
+import { useAuth } from "../contexts/auth";
 
 function Route() {
+  const { login } = useAuth();
+
   function onSubmit(event) {
     event.preventDefault();
 
-    login(Object.fromEntries(new FormData(event.currentTarget).entries()))
-      //
-      .then(console.log);
+    login(Object.fromEntries(new FormData(event.currentTarget).entries()));
   }
 
   return (
