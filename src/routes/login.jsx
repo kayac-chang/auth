@@ -1,12 +1,16 @@
-import { useAuth } from "../contexts/auth";
+import { useNavigate } from "react-router-dom";
+import login from "../api/login";
 
 function Route() {
-  const { login } = useAuth();
+  const nav = useNavigate();
 
   function onSubmit(event) {
     event.preventDefault();
+    const data = Object.fromEntries(
+      new FormData(event.currentTarget).entries()
+    );
 
-    login(Object.fromEntries(new FormData(event.currentTarget).entries()));
+    login(data).then(() => nav("/"));
   }
 
   return (
